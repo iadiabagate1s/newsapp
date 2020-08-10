@@ -95,7 +95,7 @@ def landing_page():
 @app.route('/signup', methods = ['GET','POST'])
 def adduser():
   ''' register a user form and dorm handle '''
-  form = Register()
+  formreg = Register()
  
   
   if form.validate_on_submit():
@@ -110,7 +110,7 @@ def adduser():
         
     return redirect(f'/user/home/{newuser.username}')
   
-  return render_template('register.html', form = form)
+  return render_template('register.html', formreg = formreg)
 
 
 #log in form and form submission
