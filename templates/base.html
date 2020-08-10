@@ -56,7 +56,7 @@
                     
                   {% endfor %}
           
-                  <button class='btn btn-primary btn-block btn-lg'>Log in</button>
+                  <button type="submit" class='btn btn-primary btn-block btn-lg'>Log in</button>
                 </form>
                 
               </li>
@@ -66,8 +66,8 @@
                   Register
                 </a>
                 
-                <form method="POST" action="/signup" class="dropdown-menu p-2" id="user_form">
-          
+                <form  action="/signup" method="POST" class="dropdown-menu p-2" id="user_form">
+                  {{ formreg.hidden_tag() }}
                   {% for field in formreg if field.widget.input_type != 'hidden' %}
                     {% for error in field.errors %}
                       <span class="text-danger">{{ error }}</span>
@@ -81,7 +81,7 @@
                     
                   {% endfor %}
           
-                  <button class='btn btn-primary btn-block btn-lg'>Sign up</button>
+                  <button type="submit" class='btn btn-primary btn-block btn-lg'>Sign up</button>
                 </form>
                 
               </li>
@@ -154,8 +154,9 @@
     </div>
 
 
-
-
+    {% for msg in get_flashed_messages() %}
+    <p class="wrong">{{ msg }}</p>
+  {% endfor %}
    
     <h1 >Big News</h1>
     {%if 'username' in session%}
@@ -231,6 +232,7 @@
         </div>
  
       
+
 
 
     <div id='cardstr' class="container-fluid row flex-row row-cols-sm-2 row-cols-md-3 row-cols-lg-4 justify-content-around">

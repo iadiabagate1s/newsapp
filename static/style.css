@@ -81,17 +81,22 @@ body{
  margin-left: 100px;
 }
 .move{
+    position: relative;
     transition-duration: 1.7s;
     margin-bottom: 200;
     transform: translateY(-225px);
+    z-index: 999;
     transition-property: all;
     width: 50vw;
 }
 .bg{
     background: rgb(180, 134, 144);
 }
+
 .dropdown-menu{
+    
     width: 312px;
+    
     background-color: rgb(216, 216, 216);
 }
 #input-bar-btn{
@@ -111,4 +116,11 @@ body{
     #infotop{
       display: none;
     }
+  }
+
+  .wrong{
+      background-color: rgb(218, 77, 77);
+      opacity: 75%;
+      font-weight: 500;
+      font-size: 2rem;
   }

@@ -74,6 +74,7 @@ if ($('#welcome').data() ){
     key: 'eotpicYMnWHOwiNYfxZAfi8vMOizbSdE',
     container: document.querySelector('#place-search-input'),
     useDeviceLocation : true,
+    limit: 1,
   }).on('change', async (e) => {
         $('#wicon').detach()
         $('#barcont').addClass('move')

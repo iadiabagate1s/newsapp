@@ -17,6 +17,7 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_ECHO'] = True
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'malachixxl')
 app.config['DEBUG_TB_INTERCEPT_REDIRECTS']= False
+app.config['WTF_CSRF_ENABLED'] = True
 debug = DebugToolbarExtension(app)
 
 
@@ -92,32 +93,40 @@ def landing_page():
   
   
 #register
-@app.route('/signup', methods = ['GET','POST'])
+@app.route('/signup', methods = ['POST'])
 def adduser():
   ''' register a user form and dorm handle '''
-  formreg = Register()
-  form = LoginForm()
- 
-  
-  if formreg.validate_on_submit():
-    Email= form.email.data
-    username = form.username.data
-    password = form.password.data
-    newuser = User.register(username, password, Email,)
+  try:
+    formreg = Register()
+    print(formreg ,'-----------------')
+    if formreg.validate_on_submit():
+      Email= formreg.email.data
+      username = formreg.username.data
+      password = formreg.password.data
+      newuser = User.register(username, password, Email,)
         
-    db.session.commit()
-    session['username']= newuser.username
-    session['id']= newuser.user_id
+      db.session.commit()
+      session['username']= newuser.username
+      session['id']= newuser.user_id
         
-    return redirect(f'/user/home/{newuser.username}')
+      return redirect(f'/user/home/{newuser.username}')
   
-  return render_template('register.html', formreg = formreg, form = form)
+    flash('Invalid Username/Password or Email Please try again', 'wrong')
+    return redirect('/')
+  except:
+    flash('Invalid Username/Password or Email Please try again', 'wrong')
+    return redirect ('/')
+    
 
 
 #log in form and form submission
-@app.route('/login', methods = ['GET','POST'])
+@app.route('/login', methods = ['POST'])
 def login():
+  
   ''' load login form and submission '''
+  form = LoginForm()
+  formreg = Register()
+    
   
   if 'username' in session:
     username = session[username]
@@ -126,7 +135,7 @@ def login():
   else:
       
     form=LoginForm()
-    formreg = Register()
+    
 
     if form.validate_on_submit():
       username = form.username.data
@@ -134,18 +143,14 @@ def login():
         
       currentuser = User.authenticate(username, password)
       if (currentuser == False ):
-        flash('The Username/Password was incorrect. Try again ')
+        flash('The Username/Password was incorrect. Try again ', 'wrong')
         
-        return render_template('login.html', form = form, formreg = formreg )
+        return redirect('/')
       else :
-          session['username']= currentuser.username
-          session['id']= currentuser.user_id
-          
-          
-        
-          return redirect("/")
-    
-  return render_template('login.html', form = form, formreg = formreg)
+        session['username']= currentuser.username
+        session['id']= currentuser.user_id
+        return redirect(f'/user/home/{username}')
+  
 
 
 #edit user form and form handle
@@ -206,17 +211,18 @@ def userhome(username):
  #-------------------------search terms page-------------------- 
 @app.route('/search', methods = ['GET','POST'])
 def searchtopic():
+  form = LoginForm()
+  formreg = Register()
   
   value = request.args['word']
   
   print('word----', value)
-  form = LoginForm()
-  formreg = Register()
+
   newsresp = requests.get(f'https://newsapi.org/v2/top-headlines?q={value}&apiKey={news_api_key}')
   newsresp = newsresp.json()
   newsresp = newsresp['articles']
   
-  return render_template('search.html', form = form , formreg = formreg, newsresp = newsresp)
+  return render_template('search.html', newsresp = newsresp, form = form , formreg = formreg)
 
 #----------------------FAVORTIE AND LIKES ---------------------------------
 
