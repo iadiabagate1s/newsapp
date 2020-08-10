@@ -32,36 +32,44 @@ body{
 }
 #inputbar{
     width: 100vw;
+    left: 50px;
    
   
 }
 #barcont{
+
     
     margin-top: 250px;
     margin-bottom: 0px;
-    margin-right: 100px;
-    width: 80vw;
+    
+    width: 60vw;
     display: flex;
+    right: 150px;
+   
     /* justify-content: center;
     align-items: center; */
    
     
 }
 #barcont2{
-    
-    margin-top: 25px;
-    margin-bottom: 30px;
-    margin-right: 100px;
-    width: 80vw;
     display: flex;
-    /* justify-content: center;
-    align-items: center; */
+    max-width: 50vw;
+    right: 200px;
+    
+    /* margin-top: 25px;
+    margin-bottom: 30px;
+    margin-right: 150px;
+    width: 60vw;
+    display: flex;
+    right: 20px; */
+   
    
 }
 
 .movediv{
     transition-duration: 2s;
     transform: translateY(-200px);
+    
     margin-top: 100px;
     transition-property: all;
    
@@ -83,7 +91,6 @@ body{
 .move{
     position: relative;
     transition-duration: 1.7s;
-    margin-bottom: 200;
     transform: translateY(-225px);
     z-index: 999;
     transition-property: all;
@@ -108,7 +115,7 @@ body{
 }
 #input-bar-btn{
     width:200px;
-    margin-left: 10px;git 
+    margin-left: 10px;
 }
 
 #input-search-btn{
@@ -121,16 +128,44 @@ body{
       display: none;
     }
   }
-  @media (max-width: 400px){
+  @media (max-width: 340px){
     #searchbar{
         position: relative;
         width: 50vw;
         margin: auto;
-        mar
+        
 
     }
     
   }
+  @media (max-width: 740px){
+    #barcont2{
+        display: flex;
+        max-width: 70vw;
+        
+        left: 20px;
+
+    }
+    #barcont{
+
+    
+        margin-top: 250px;
+        margin-bottom: 0px;
+        
+        width: 70vw;
+        display: flex;
+        right: 50px;
+       
+        /* justify-content: center;
+        align-items: center; */
+       
+        
+    }
+    
+  }
+
+
+    
 
   .wrong{
       background-color: rgba(223, 137, 137, 0.74);
@@ -141,5 +176,5 @@ body{
 
 
 .container-fuild{
-    max-width: 100%;
+    max-width: 60%;
 }
