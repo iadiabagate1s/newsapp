@@ -14,7 +14,7 @@ icon.append(`<img id= 'wicon' src=http://openweathermap.org/img/wn/02d.png alt="
 
 // save an article to database function(likes)
 async function savearticle( url, title , description){
-  resp = await axios.post(`http://localhost:5000/save`,{
+  resp = await axios.post(`/save`,{
 
   url,
   title, 

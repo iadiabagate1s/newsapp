@@ -21,7 +21,7 @@ let subvalue = input.value
   else{
     console.log ('this is value', subvalue)
 
-    resp = await axios.post(`${base_url}/addkeyword`, {
+    resp = await axios.post(`/addkeyword`, {
       subject : subvalue,
     })
     console.log(resp)
@@ -51,7 +51,7 @@ $('ul').on('click', function(e){
     }
 
     async function deletecup(id){
-        res = await axios.delete(`${base_url}/keyword/${id}`)
+        res = await axios.delete(`/keyword/${id}`)
         console.log (res)
     }
 
