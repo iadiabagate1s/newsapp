@@ -127,7 +127,7 @@ def login():
     form=LoginForm()
     formreg = Register()
 
-    if form.validate_on_submit():
+    if formreg.validate_on_submit():
       username = form.username.data
       password = form.password.data
         
@@ -205,16 +205,17 @@ def userhome(username):
  #-------------------------search terms page-------------------- 
 @app.route('/search', methods = ['GET','POST'])
 def searchtopic():
+  
   value = request.args['word']
   
   print('word----', value)
   form = LoginForm()
-  formregister = Register()
+  formreg = Register()
   newsresp = requests.get(f'https://newsapi.org/v2/top-headlines?q={value}&apiKey={news_api_key}')
   newsresp = newsresp.json()
   newsresp = newsresp['articles']
   
-  return render_template('search.html', form = form , formregister = formregister, newsresp = newsresp)
+  return render_template('search.html', form = form , formreg = formreg, newsresp = newsresp)
 
 #----------------------FAVORTIE AND LIKES ---------------------------------
 
