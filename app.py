@@ -96,6 +96,7 @@ def landing_page():
 def adduser():
   ''' register a user form and dorm handle '''
   formreg = Register()
+  form = LoginForm()
  
   
   if formreg.validate_on_submit():
@@ -110,7 +111,7 @@ def adduser():
         
     return redirect(f'/user/home/{newuser.username}')
   
-  return render_template('register.html', formreg = formreg)
+  return render_template('register.html', formreg = formreg, form = form)
 
 
 #log in form and form submission
