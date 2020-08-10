@@ -1,0 +1,68 @@
+{%extends 'base.html'%}
+
+
+{% block title %} search {% endblock %}
+
+
+{%block content %}
+
+<div class="container-fluid my-4 flex-row col-md-12justify-content-center align-items-center">
+<form >
+<input id='searchbar' class='col-sm-12' type='text' placeholder='Search'>
+<button id="btnbtn" type="submit" class="btn btn-sm btn-outline-info col-sm-1 text-center">search</button>
+</form>
+</div>
+
+
+<div id="cardstrsearch" class="container-fluid row flex-row row-cols-sm-2 row-cols-md-3 row-cols-lg-4 justify-content-around">
+  {% for story in newsresp %}
+
+
+    
+    
+   
+   
+       
+  <div id='storycard' class="card mx-1 my-1" style="width: 15rem border-0">
+    <img {% if story.urlToImage%} src={{story.urlToImage}}{% else %} src='static/img/no image.png'{%endif%} class="card-img-top" alt="...">
+
+
+    
+    <div id='cardbod' class="card-body ">
+      
+    
+
+
+
+      <h5 class="card-title">{{story.title}}</h5>
+      <p class="card-text">{{story.description}}</p>
+      <a href={{story.url}} class="btn btn-primary">Full story</a>
+      {%if 'username' in session %}
+      <button id="bookmark" class="savebtn btn btn-danger">save</button>
+      {%endif%}
+    
+    </div>
+    </div>
+   
+    
+
+  {% endfor%}
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="/static/search.js"></script>
+<script src="/static/script.js"></script>
+{% endblock %}

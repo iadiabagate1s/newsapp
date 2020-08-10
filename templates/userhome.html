@@ -1,0 +1,105 @@
+{%extends 'base.html'%}
+
+
+{% block title %} User Home {% endblock %}
+
+
+{%block content %}
+
+<div class="container-fluid d-flex flex-row">
+
+    <div class="col--md-2 mr-5">
+
+        <div class="">
+
+            <div class=" d-flex flex-row ">
+                <div>
+                    <h4 class=''>{{currentuser.username}}</h4>
+                    <h6>{{currentuser.email}}</h6>
+        
+                </div>
+                <div class="col">
+                    <h4>Location</h4>
+                    {%if 'contcode' in session%}
+                    <h6><b>{{session['contcode']}}</b></h6>
+                    {%endif%}
+                </div>
+
+            </div>
+           
+           
+        
+        <div class=""><a class="btn btn-warning btn-sm col" href="/user/{{currentuser.user_id}}"> Edit</a></div> 
+        <div class=""><a class="btn btn-secondary btn-sm col" href="/users/{{currentuser.username}}/delete"> Delete</a></div> 
+        
+    </div>
+<div>
+    
+
+
+</div>
+
+
+
+
+<div class=" ">
+    <div class=" col">
+        <h3 class="text-center"> <b>Keywords</b> </h3>
+        <ul id="wordul">
+            {%for words in currentuser.searchwords %}
+            <li class="my-1"><b>{{words.word}} </b><button class="btn btn-danger btn-sm " id="removeword" data-id="{{words.keyword_id}}" type="button"> X </button> </li>
+            {%endfor%}
+            
+        </ul>
+        <form id="addkey">
+            <input maxlength="15" type="text" name="keyword" id="keywordin" placeholder="enter a search topic">
+            <button class="btn btn-sm btn-outline-success" id="keybtn" type="submit">add</button>
+        </form>
+        
+    </div>
+
+    
+    
+
+</div>
+
+
+    </div>
+
+
+
+
+    
+
+<div class="container-fluid col-sm-12 col-md-8">
+    <h2 class="text-center ml-5">Favorites</h2>
+    <div class="container-fluid d-flex flex-row flex-wrap ">
+        {% for likes in currentuser.likes %}
+              <div class="card w-50 ">
+                <div class="card-body">
+                  <h5 class="card-title">{{likes.article_url}}</h5>
+                  <p class="card-text">{{likes.article_description}}</p>
+                  <a href="{{likes.article_title}}" class="btn btn-primary">link</a>
+                  <button class="removesave btn btn-outline-danger">Remove</button>
+                </div>
+              </div>
+        {% endfor %}
+
+    </div>
+
+
+   
+
+
+
+</div>
+
+   
+
+
+</div>
+
+
+
+
+{% endblock %}

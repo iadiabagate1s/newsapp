@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <script src="https://api.mqcdn.com/sdk/place-search-js/v1.0.0/place-search.js"></script>
+    <link type="text/css" rel="stylesheet" href="https://api.mqcdn.com/sdk/place-search-js/v1.0.0/place-search.css"/>   
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="/static/style.css">
+    <title>{% block title %} News {% endblock %}</title>
+</head>
+<body>
+
+  
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark mx-1 my-1">
+        <a class="navbar-brand" href="#">News</a>
+
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+          <ul class="navbar-nav">
+            <li class="nav-item active">
+              <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+            </li>
+            {%if 'username' in session%}
+              <li class="nav-item">
+                <a class="nav-link" data-id= 'welcome' id="welcome" href="/user/home/{{session['username']}}">{{session['username']}}</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/logout">Log Out</a>
+              </li>
+
+              {%else%}
+              <li class="active nav-item dropdown">
+                <a class="nav-link dropdown-toggle text-light" role="button" href="#" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Log In
+                </a>
+                
+                <form method="POST" action="/login" class="dropdown-menu p-2" id="user_form">
+                  {{ form.hidden_tag() }}
+          
+                  {% for field in form if field.widget.input_type != 'hidden' %}
+                    {% for error in field.errors %}
+                      <span class="text-danger">{{ error }}</span>
+                    {% endfor %}
+                    <div class="form-group">
+
+                      {{field.label}}
+                      {{ field(placeholder=field.label.text, class="form-control") }}
+
+                    </div>
+                    
+                  {% endfor %}
+          
+                  <button class='btn btn-primary btn-block btn-lg'>Log in</button>
+                </form>
+                
+              </li>
+
+              <li class="active nav-item dropdown">
+                <a class="nav-link dropdown-toggle text-light" role="button" href="#" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Register
+                </a>
+                
+                <form method="POST" action="/signup" class="dropdown-menu p-2" id="user_form">
+                  {{ formreg.hidden_tag() }}
+          
+                  {% for field in formreg if field.widget.input_type != 'hidden' %}
+                    {% for error in field.errors %}
+                      <span class="text-danger">{{ error }}</span>
+                    {% endfor %}
+                    <div class="form-group">
+
+                      {{field.label}}
+                      {{ field(placeholder=field.label.text, class="form-control") }}
+
+                    </div>
+                    
+                  {% endfor %}
+          
+                  <button class='btn btn-primary btn-block btn-lg'>Sign up</button>
+                </form>
+                
+              </li>
+
+              {%endif%}
+            
+
+              <li class=" active nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i class="fa fa-search" aria-hidden="true"></i>
+                </a>
+                <div class="dropdown-menu my-2" aria-labelledby="navbarDropdownMenuLink">
+                <form id='formsearchnav' class='form-inline ' action="/search">
+
+                  
+                    <input id="input-bar-btn" class="dropdown-item" name= 'word' type="text" placeholder="Search"/>
+                    <button id='input-search-btn' class="btn btn-sm btn-outline-primary " type="submit" >search</button>
+                  
+                  
+                  
+
+                </form>
+                  
+                  
+               
+                </div>
+            </li>
+          
+           
+          </ul>
+        
+           
+   
+</ul>
+</div>
+      </nav>
+      {% block content %}
+
+      
+        <div id='color1' class="container bg-primary ">
+        
+            <div id="container" class="bg-danger ">
+                    <div id='infotop' class=" flex-column text-center">
+
+                        <div id='icon'>  </div>
+                        <div class="status text-center">Weather</div>
+                        <div class="location text-center">Forecast</div>
+
+                        <div class="detail-section ">
+
+                            <div class="detail col">
+                                <div class="title ">Winds</div>
+                                <div class="wvalue ">TBD</div>
+                            </div>
+            
+                            <div class="detail mx-2">
+                                <div class="title ">Temperature</div>
+                                <div class="tvalue ">TBD</div>
+                            </div>
+            
+                            <div class="detail mx-2 ">
+                                <div class="title ">Humidity</div>
+                                <div class="hvalue ">TBD</div>
+                            </div>
+                        </div>
+            
+                    </div>
+        </div>
+     
+    </div>
+
+
+
+
+   
+    <h1 >Big News</h1>
+    {%if 'username' in session%}
+    <h3 id="welcome">Welcome Back {{session['username']}}!</h3>
+
+
+    <div>
+      
+      {% for word in user.searchwords %}
+     <h3 style="display: none;">{{word.word}}</h3> 
+    {%endfor%}
+    </div>
+    
+
+  
+      
+     
+
+    <div id="barcont2" class="container-fluid ">
+      <div id = 'inputbar' class='city-search-container'>
+          <input type="search" id="place-search-input" class="city-search " placeholder="Enter location or country eg. 'France France'">
+      </div>
+      </div>
+
+    
+
+
+  <div id='cardstr' class="container-fluid row flex-row row-cols-sm-2 row-cols-md-3 row-cols-lg-5 justify-content-around">
+    
+  
+
+
+    {% for story in newsresp %}
+
+
+    
+    
+   
+   
+       
+        <div id='storycard' class="card mx-1 my-1" style="width: 15rem border-0">
+          <img {% if story.urlToImage%} src={{story.urlToImage}}{% else %} src='static/img/no image.png'{%endif%} class="card-img-top" alt="...">
+
+
+          
+          <div id='cardbod' class="card-body ">
+            
+          
+
+
+
+            <h5 class="card-title">{{story.title}}</h5>
+            <p class="card-text">{{story.description}}</p>
+            <a href={{story.url}} class="btn btn-primary">Full story</a>
+            <button id="bookmark" class="savebtn btn btn-danger">save</button>
+          
+          </div>
+          </div>
+         
+          
+ 
+        {% endfor%}
+
+          
+  </div>
+
+
+    {%else%}
+        <div id="barcont" class=" container-fluid ">
+        <div id = 'inputbar' class="city-search-container">
+            <input type="search" id="place-search-input" class="city-search " placeholder="Enter location or country eg. 'France France'">
+        </div>
+        </div>
+ 
+      
+
+
+    <div id='cardstr' class="container-fluid row flex-row row-cols-sm-2 row-cols-md-3 row-cols-lg-4 justify-content-around">
+       
+    </div>
+   
+
+    
+
+
+    {%endif%}
+
+
+    {% endblock %}
+
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+    <script src="/static/script.js"></script> 
+    <script src="/static/search.js"></script>  
+    <script src="/static/keywords.js"></script>   
+</body>
+</html>
