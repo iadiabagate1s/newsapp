@@ -158,7 +158,7 @@
     <p class="wrong">{{ msg }}</p>
   {% endfor %}
    
-    
+    <h1 style="visibility: hidden;" >Big News</h1>
     {%if 'username' in session%}
     <h3 id="welcome">Welcome Back {{session['username']}}!</h3>
 
@@ -175,7 +175,7 @@
       
      
 
-    <div id="barcont2" class="container-fluid col">
+    <div id="barcont2" class="container-fluid my-2 col">
       <div id = 'inputbar' class='city-search-container'>
           <input type="search" id="place-search-input" class="city-search " placeholder="Enter location or country eg. 'France France'">
       </div>
