@@ -15,7 +15,9 @@
 
   
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark mx-1 my-1">
-        <a class="navbar-brand" href="#">News</a>
+        <a class="navbar-brand" href="#">
+          <img src="static/img/tt.jpg" width="40" height="40" class="d-inline-block align-top" alt="" loading="lazy">
+        </a>
 
 
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -24,7 +26,7 @@
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
           <ul class="navbar-nav">
             <li class="nav-item active">
-              <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+              <a class="nav-link" href="/">News <span class="sr-only">(current)</span></a>
             </li>
             {%if 'username' in session%}
               <li class="nav-item">
@@ -35,19 +37,19 @@
               </li>
 
               {%else%}
-              <li class="active nav-item dropdown">
+              <li class="active nav-item dropdown bg-dark">
                 <a class="nav-link dropdown-toggle text-light" role="button" href="#" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   Log In
                 </a>
                 
-                <form method="POST" action="/login" class="dropdown-menu p-2" id="user_form">
+                <form method="POST" action="/login" class="dropdown-menu p-2 bg-dark" id="user_form">
                   {{ form.hidden_tag() }}
           
                   {% for field in form if field.widget.input_type != 'hidden' %}
                     {% for error in field.errors %}
                       <span class="text-danger">{{ error }}</span>
                     {% endfor %}
-                    <div class="form-group">
+                    <div class="form-group bg-dark text-light">
 
                       {{field.label}}
                       {{ field(placeholder=field.label.text, class="form-control") }}
@@ -61,18 +63,18 @@
                 
               </li>
 
-              <li class="active nav-item dropdown">
-                <a class="nav-link dropdown-toggle text-light" role="button" href="#" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <li class="active nav-item dropdown bg-dark">
+                <a class="nav-link dropdown-toggle bg-dark text-light" role="button" href="#" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   Register
                 </a>
                 
-                <form  action="/signup" method="POST" class="dropdown-menu p-2" id="user_form">
+                <form  action="/signup" method="POST" class="dropdown-menu p-2 bg-dark " id="user_form">
                   {{ formreg.hidden_tag() }}
                   {% for field in formreg if field.widget.input_type != 'hidden' %}
                     {% for error in field.errors %}
                       <span class="text-danger">{{ error }}</span>
                     {% endfor %}
-                    <div class="form-group">
+                    <div class="form-group bg-dark text-light">
 
                       {{field.label}}
                       {{ field(placeholder=field.label.text, class="form-control") }}
@@ -89,11 +91,11 @@
               {%endif%}
             
 
-              <li class=" active nav-item dropdown">
+              <li class=" active nav-item dropdown ">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   <i class="fa fa-search" aria-hidden="true"></i>
                 </a>
-                <div class="dropdown-menu my-2" aria-labelledby="navbarDropdownMenuLink">
+                <div class="dropdown-menu my-2 bg-dark" aria-labelledby="navbarDropdownMenuLink">
                 <form id='formsearchnav' class='form-inline ' action="/search">
 
                   
@@ -127,24 +129,24 @@
                     <div id='infotop' class=" flex-column text-center">
 
                         <div id='icon'>  </div>
-                        <div class="status text-center">Weather</div>
-                        <div class="location text-center">Forecast</div>
+                        <div class="status text-center text-light">Weather</div>
+                        <div class="location text-center text-light">Forecast</div>
 
                         <div class="detail-section ">
 
                             <div class="detail col">
-                                <div class="title ">Winds</div>
-                                <div class="wvalue ">TBD</div>
+                                <div class="title text-light">Winds</div>
+                                <div class="wvalue text-light">TBD</div>
                             </div>
             
                             <div class="detail mx-2">
-                                <div class="title ">Temperature</div>
-                                <div class="tvalue ">TBD</div>
+                                <div class="title text-light ">Temperature</div>
+                                <div class="tvalue text-light ">TBD</div>
                             </div>
             
                             <div class="detail mx-2 ">
-                                <div class="title ">Humidity</div>
-                                <div class="hvalue ">TBD</div>
+                                <div class="title text-light">Humidity</div>
+                                <div class="value text-light ">TBD</div>
                             </div>
                         </div>
             
@@ -177,7 +179,7 @@
 
     <div id="barcont2" class="container-fluid my-2 col">
       <div id = 'inputbar' class='city-search-container'>
-          <input type="search" id="place-search-input" class="city-search " placeholder="Enter location or country eg. 'France France'">
+          <input type="search" id="place-search-input" class="city-search " placeholder="Enter an address">
       </div>
       </div>
 
@@ -227,7 +229,7 @@
     {%else%}
         <div id="barcont" class=" container-fluid ">
         <div id = 'inputbar' class="city-search-container">
-            <input type="search" id="place-search-input" class="city-search " placeholder="Enter location or country eg. 'France France'">
+            <input type="search" id="place-search-input" class="city-search " placeholder="Enter an address">
         </div>
         </div>
  

@@ -1,12 +1,4 @@
-body{
-    background: linear-gradient(to right, rgb(255, 255, 255), rgb(110, 110, 110), rgb(199, 128, 128));
-    background-image: url('/static/img/news.jpg');
-    background-repeat: no-repeat;
-    background-size: contain;
-   background-attachment: fixed;
-    
-    
-}
+
 #logo{
     width: 300px;
     height: 155px;
@@ -16,7 +8,7 @@ body{
 #infotop{
     position: absolute;
     display: inline-flex;
-    background: linear-gradient(to right, rgb(73, 196, 226), rgb(116, 240, 153), rgb(218, 215, 56));
+    background: linear-gradient(to right, rgba(54, 60, 61, 0.699), rgba(74, 77, 75, 0.692), rgba(214, 56, 56, 0.712));
     top: 50px;
     margin-top: 20px;
     right: 3%;
@@ -27,7 +19,7 @@ body{
 .detail-section{
     display: inline-flex;
     margin: 10px;
-    background-color: rgb(247, 151, 26);
+    background-color: rgb(54, 54, 53);
     border-radius: 20px;
 }
 #inputbar{
@@ -105,7 +97,7 @@ body{
     
     width: 312px;
     
-    background-color: rgb(216, 216, 216);
+    /* background-color: rgb(44, 43, 43); */
 }
 #btnbtn{
     margin: auto;
